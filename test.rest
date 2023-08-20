@@ -1,0 +1,40 @@
+GET http://127.0.0.1:8000/
+Content-Type: application/json
+
+{}
+
+###
+
+POST http://127.0.0.1:8000/
+Content-Type: application/json
+
+{"phone_number": "+79869140000"}
+
+###
+
+POST http://127.0.0.1:8000/
+Content-Type: application/json
+
+{"phone_number": "+79869140000", "password": "Eodi"}
+
+###
+
+GET http://127.0.0.1:8000/profile/
+Content-Type: application/json
+
+{}
+
+###
+
+PUT http://127.0.0.1:8000/profile/
+Content-Type: application/json
+
+{"invited_by": "I8oh63"}
+
+###
+
+GET http://127.0.0.1:8000/logout/
+Content-Type: application/json
+
+{}
+

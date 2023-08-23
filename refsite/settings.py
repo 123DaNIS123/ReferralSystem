@@ -30,8 +30,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = list(os.environ.get("ALLOWED_HOSTS").split(", "))
-CSRF_TRUSTED_ORIGINS = ['https://web-production-8bfb.up.railway.app']
+ALLOWED_HOSTS = list(os.environ.get("ALLOWED_HOSTS").split(" "))
+CSRF_TRUSTED_ORIGINS = list(os.environ.get("CSRF_TRUSTED_ORIGINS").split(" "))
 
 # Application definition
 

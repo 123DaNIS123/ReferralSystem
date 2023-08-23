@@ -31,7 +31,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = list(os.environ.get("ALLOWED_HOSTS").split(" "))
-CSRF_TRUSTED_ORIGINS = list(os.environ.get("CSRF_TRUSTED_ORIGINS").split(" "))
+print(ALLOWED_HOSTS)
+CSRF_TRUSTED_ORIGINS = ["https://web-production-8bfb.up.railway.app"]
+print(CSRF_TRUSTED_ORIGINS)
 
 # Application definition
 

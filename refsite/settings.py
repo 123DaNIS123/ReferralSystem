@@ -31,9 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = list(os.environ.get("ALLOWED_HOSTS").split(" "))
-print(ALLOWED_HOSTS)
-CSRF_TRUSTED_ORIGINS = ["*"]
-print(CSRF_TRUSTED_ORIGINS)
+CSRF_TRUSTED_ORIGINS = list(os.environ.get("CSRF_TRUSTED_ORIGINS").split(" "))
 
 # Application definition
 
@@ -156,4 +154,3 @@ STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-CSRF_TRUSTED_ORIGINS = ['https://front.bluemix.net']

@@ -32,7 +32,7 @@ DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = list(os.environ.get("ALLOWED_HOSTS").split(" "))
 print(ALLOWED_HOSTS)
-CSRF_TRUSTED_ORIGINS = ["https://web-production-8bfb.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://*", "http://*"]
 print(CSRF_TRUSTED_ORIGINS)
 
 # Application definition

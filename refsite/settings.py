@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
-from datetime import timedelta
-
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,13 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-nlqqj#+$08+j$l3f1kxr)-sqvmx=1f#p(w#cn$cx0o+zayz%l("
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = list(os.environ.get("ALLOWED_HOSTS").split(", "))
 CSRF_TRUSTED_ORIGINS = ['https://web-production-8bfb.up.railway.app']
 
 # Application definition
@@ -90,12 +90,12 @@ WSGI_APPLICATION = "refsite.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": "cJJRqi3oaD78YozLC9Yg",
-        "HOST": "containers-us-west-53.railway.app",
-        "PORT": "7741",
+        "ENGINE": os.environ.get("DB_ENGINE"),
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
 

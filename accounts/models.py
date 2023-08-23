@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, IntegrityError
 from django.contrib.auth.models import AbstractBaseUser
 from django.core.validators import RegexValidator
 
@@ -12,7 +12,7 @@ from .extension import utils
 
 class CustomUser(AbstractBaseUser):
     
-    invitation_code = models.CharField(primary_key=True, default=utils.get_random_string(6), unique=True, null=False, blank=True)
+    invitation_code = models.CharField(primary_key=True, unique=True, null=False, blank=True)
 
     phone_regex = RegexValidator(regex=r'^\+\d{8,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=16, blank=True, unique=True)
@@ -29,6 +29,20 @@ class CustomUser(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+    def save(self, *args, **kwargs):
+        print("SAVE method")
+        if not self.pk:
+            while True:
+                self.pk = utils.get_random_string(6)
+                print("trying to make a pk")
+                try:
+                    super(CustomUser,self).save(*args, **kwargs)
+                    break
+                except IntegrityError:
+                    continue
+        else:
+            super(CustomUser,self).save(*args, **kwargs)
     
     def __str__(self):
         return str(self.phone_number)

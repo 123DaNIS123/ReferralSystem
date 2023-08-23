@@ -22,6 +22,7 @@ class AuthorizationView(GenericAPIView):
         print(request.user.is_authenticated)
         print(request.user)
         data = request.data
+        print(data)
         serializer = UserAuthSerializer(data = data)
         serializer.is_valid(raise_exception=True)
         user = CustomUser.objects.filter(phone_number=data["phone_number"]).first()
@@ -70,7 +71,9 @@ class ProfileView(GenericAPIView):
             }, status=status.HTTP_200_OK)
     def put(self, request, *args, **kwargs):
         print(request.user.is_authenticated)
-
+        if request.user.invited_by:
+            return Response({"message": "You already have a user you have referred to"},
+                        status=status.HTTP_200_OK)
         user = CustomUser.objects.filter(invitation_code=request.data["invited_by"]).first()
         if user:
             if request.user.pk != user.pk:
